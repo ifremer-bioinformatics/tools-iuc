@@ -24,7 +24,7 @@
 
     ]]></command>
     <inputs>
-        <param name="asv_table" type="integer" value="0"  label="CPU" help="TODO" />
+        <param name="asv_table" type="integer" value="0"  label="ASV table" help="TODO" />
         <param name="swarm_cluster_list" type="data" format="fasta"  label="ASV sequences" help="TODO" />
         <param name="cluster_id" type="data" format="fasta"  label="ASV swarm sequences" help="TODO" />
         <param name="asv_table_clustered" type="data" format="fasta"  label="ASV swarm sequences" help="TODO" />
