@@ -1,11 +1,9 @@
 <tool id="figaro" name="Figaro" version="@TOOL_VERSION_FIGARO@+galaxy@VERSION_SUFFIX@" profile="20.01" license="MIT">
     <description>Identify optimal optimizing microbiome rRNA gene trimming parameters for DADA2</description>
-    <xrefs>
-        <xref type="bio.tools"></xref>
-    </xrefs>
     <macros>
         <import>macro.xml</import>
     </macros>
+    <expand macro="figaro_xref"/>
     <expand macro="figaro_edam"/>
     <expand macro="figaro_requirements"/>
     <required_files>

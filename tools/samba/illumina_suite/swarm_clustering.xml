@@ -1,12 +1,10 @@
 <tool id="swarm_clustering" name="Swarm clustering" version="@TOOL_VERSION_SWARM@+galaxy@VERSION_SUFFIX@" profile="20.01" license="MIT">
     <description>Clustering of AVSs using swarm</description>
-    <xrefs>
-        <xref type="bio.tools"></xref>
-    </xrefs>
     <macros>
         <import>macro.xml</import>
     </macros>
-    <expand macro="figaro_edam"/>
+    <expand macro="swarm_xref"/>
+    <expand macro="swarm_edam"/>
     <expand macro="swarm_requirements"/>
     <required_files>
         <include type="literal" path="macro.xml"/>
@@ -31,8 +29,7 @@
 
     ]]></command>
     <inputs>
-        <param name="cpu" type="integer" value="0"  label="CPU" help="TODO" />
-        <param name="asv_seq" type="data" format="fasta"  label="ASV sequences" help="TODO" />
+        <param name="asv_seq" type="data" format="fasta"  label="ASV sequences file" help="TODO" />
         <param name="swarm_asv_seq" type="data" format="fasta"  label="ASV swarm sequences" help="TODO" />
     </inputs>
     <outputs>

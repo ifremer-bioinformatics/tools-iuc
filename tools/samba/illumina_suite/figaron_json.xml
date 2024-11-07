@@ -1,11 +1,9 @@
 <tool id="figaro_json" name="Figaro json" version="@TOOL_VERSION_FIGARO@+galaxy@VERSION_SUFFIX@" profile="20.01" license="MIT">
     <description>to csv</description>
-    <xrefs>
-        <xref type="bio.tools"></xref>
-    </xrefs>
     <macros>
         <import>macro.xml</import>
     </macros>
+    <expand macro="figaro_xref"/>
     <expand macro="figaro_edam"/>
     <expand macro="figaro_requirements"/>
     <requirements>

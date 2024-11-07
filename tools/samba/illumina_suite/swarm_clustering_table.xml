@@ -1,12 +1,10 @@
 <tool id="swarm_clustering" name="Reconstruct ASV table" version="@TOOL_VERSION_SWARM@+galaxy@VERSION_SUFFIX@" profile="20.01" license="MIT">
     <description>from ASV clustered by swarm</description>
-    <xrefs>
-        <xref type="bio.tools"></xref>
-    </xrefs>
     <macros>
         <import>macro.xml</import>
     </macros>
-    <expand macro="figaro_edam"/>
+    <expand macro="swarm_xref"/>
+    <expand macro="swarm_edam"/>
     <requirements>
         <requirement type="package" version="0.8.9">r-reshape</requirement>
         <requirement type="package" version="1.1.4">r-dplyr</requirement>
@@ -24,7 +22,7 @@
 
     ]]></command>
     <inputs>
-        <param name="asv_table" type="integer" value="0"  label="ASV table" help="TODO" />
+        <param name="asv_table" type="data" format="fasta"  label="ASV table" help="TODO" />
         <param name="swarm_cluster_list" type="data" format="fasta"  label="ASV sequences" help="TODO" />
         <param name="cluster_id" type="data" format="fasta"  label="ASV swarm sequences" help="TODO" />
         <param name="asv_table_clustered" type="data" format="fasta"  label="ASV swarm sequences" help="TODO" />
