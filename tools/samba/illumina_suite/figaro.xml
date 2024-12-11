@@ -5,33 +5,26 @@
     </macros>
     <expand macro="figaro_xref"/>
     <expand macro="figaro_edam"/>
-    <expand macro="figaro_requirements"/>
+    <requirements>
+        <container type="docker">zymoresearch/figaro</container>
+    </requirements>
     <required_files>
         <include type="literal" path="macro.xml"/>
     </required_files>
     <command detect_errors="exit_code"><![CDATA[
-        RAW_DATA_DIR='$raw_data'
-        AMPLICON_LENGTH='$amplicon_length'
-        F_PRIMER='$f_primer'
-        R_PRIMER='$r_primer'
-        FIGARO_OUTPUT='./output_dir'
-        LOGCMD='./log_dir'
-
-        # Run FIGARO
-        CMD="figaro -i ${RAW_DATA_DIR} -o ${FIGARO_OUTPUT} -a ${AMPLICON_LENGTH} -f ${LENGTH_PRIMER_F} -r ${LENGTH_PRIMER_R}"
-        echo ${CMD} > ${LOGCMD}
-        eval ${CMD}
+        cd /opt/figaro/figaro
+        ## Run FIGARO
+        python3 figaro.py -i '$raw_data':/data/input -o '$figaro_output':/data/output -a '$amplicon_length' -f '$f_primer' -r '$r_primer'
 
     ]]></command>
     <inputs>
-        <param name="raw_data" type="data" format="" label="Raw data" help="TODO" />
+        <param name="raw_data" type="data_collection" collection_type="list, list:paired"/>
         <param name="amplicon_length" type="integer" value="0"  label="Amplicon length" help="TODO" />
         <param name="f_primer" type="integer" value="0" label="F Primer" help="TODO" />
         <param name="r_primer" type="integer" value="0"  label="R Primer" help="TODO" />
     </inputs>
     <outputs>
-        <data name="Figaro output" format="json" from_work_dir="./output_dir/*.json" label="${tool.name} on ${on_string} output" />
-        <data name="Figaro logs" format="" from_work_dir="./log_dir/*" label="${tool.name} on ${on_string} log" />
+        <data name="figaro_output" format="json" from_work_dir="/data/output/*" label="${tool.name} on ${on_string} output" />
     </outputs>
     <tests>
     </tests>
