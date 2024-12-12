@@ -12,19 +12,22 @@
         <include type="literal" path="macro.xml"/>
     </required_files>
     <command detect_errors="exit_code"><![CDATA[
-        cd /opt/figaro/figaro
+        #for $i, $infile in enumerate($infiles):
+            cp '$infile' '/tmp/${infile.element_identifier}' &&
+        #end for
+        cd /opt/figaro/figaro &&
         ## Run FIGARO
-        python3 figaro.py -i '$raw_data':/data/input -o '$figaro_output':/data/output -a '$amplicon_length' -f '$f_primer' -r '$r_primer'
-
+        python3 figaro.py -i '/tmp' -o '/tmp' -a '$amplicon_length' -f '$f_primer' -r '$r_primer' &&
+        cp /tmp/*.json '$figaro_output'
     ]]></command>
     <inputs>
-        <param name="raw_data" type="data_collection" collection_type="list, list:paired"/>
+        <param name="infiles" type="data"  multiple="true"/>
         <param name="amplicon_length" type="integer" value="0"  label="Amplicon length" help="TODO" />
         <param name="f_primer" type="integer" value="0" label="F Primer" help="TODO" />
         <param name="r_primer" type="integer" value="0"  label="R Primer" help="TODO" />
     </inputs>
     <outputs>
-        <data name="figaro_output" format="json" from_work_dir="/data/output/*" label="${tool.name} on ${on_string} output" />
+        <data name="figaro_output"  format="json" from_work_dir="*.json" label="${tool.name} on ${on_string} output" />
     </outputs>
     <tests>
     </tests>

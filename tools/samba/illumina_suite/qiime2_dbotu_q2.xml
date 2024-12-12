@@ -6,8 +6,7 @@
     <requirements>
         <container type="docker">quay.io/qiime2/amplicon:2024.10</container>
     </requirements>
-    <version_command>q2galaxy version dbotu_q2</version_command>
-    <command detect_errors="exit_code">q2galaxy run dbotu_q2 call_otus '$inputs'</command>
+    <command detect_errors="exit_code">qiime dbotu_q2 call-otus '$inputs'</command>
     <configfiles>
         <inputs name="inputs" data_style="staging_path_and_source_path"/>
     </configfiles>
