@@ -1,0 +1,42 @@
+<macros>
+    <token name="@TOOL_VERSION_FIGARO@">1.1.2</token>
+    <token name="@TOOL_VERSION_SWARM@">3.1.5</token>
+    <token name="@VERSION_SUFFIX@">0</token>
+    <xml name="figaro_xref">
+        <xrefs>
+            <xref type="bio.tools">figaro</xref>
+        </xrefs>
+    </xml>
+    <xml name="swarm_xref">
+        <xrefs>
+            <xref type="bio.tools">swarm</xref>
+        </xrefs>
+    </xml>    
+    <xml name="swarm_requirements">
+        <requirements>
+            <requirement type="package" version="@TOOL_VERSION_SWARM@">swarm</requirement>
+            <yield/>
+        </requirements>
+    </xml>
+    <xml name="figaro_edam">
+        <edam_topics>
+            <edam_topic>topic_TODO</edam_topic>
+        </edam_topics>
+        <edam_operations>
+            <edam_operation>operation_TODO</edam_operation>
+        </edam_operations>
+    </xml>
+    <xml name="swarm_edam">
+        <edam_topics>
+            <edam_topic>topic_TODO</edam_topic>
+        </edam_topics>
+        <edam_operations>
+            <edam_operation>operation_TODO</edam_operation>
+        </edam_operations>
+    </xml>
+    <xml name="figaro_bibref">
+       <citations>
+            <citation type="doi">doi:</citation>
+        </citations>
+    </xml>
+</macros>

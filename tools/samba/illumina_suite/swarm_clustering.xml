@@ -1,0 +1,62 @@
+<tool id="swarm_clustering" name="Swarm clustering" version="@TOOL_VERSION_SWARM@+galaxy@VERSION_SUFFIX@" profile="20.01" license="MIT">
+    <description>Clustering of AVSs using swarm</description>
+    <macros>
+        <import>macro.xml</import>
+    </macros>
+    <expand macro="swarm_xref"/>
+    <expand macro="swarm_edam"/>
+    <expand macro="swarm_requirements"/>
+    <required_files>
+        <include type="literal" path="macro.xml"/>
+    </required_files>
+    <command detect_errors="exit_code"><![CDATA[
+        CPUS='$cpu'
+        ASV_SEQS_FASTA='$asv_seq'
+        SWARM_ASV_SEQS_FA='$swarm_asv_seq'
+        TMP_SWARM_CLUSTER_LIST='./tmp_dir'
+        FINAL_SWARM_ASV_SEQS_FA='./output_dir'
+        LOGCMD='./log_dir'
+
+        # Run swarm
+        CMD="swarm -t ${CPUS} -f -l swarm.log -w ${SWARM_ASV_SEQS_FA} ${ASV_SEQS_FASTA} > ${TMP_SWARM_CLUSTER_LIST} "
+        echo ${CMD} > ${LOGCMD}
+        eval ${CMD}
+
+        # Reformat swarm sequence header FASTA file
+        CMD="cut -d '_' -f1 ${SWARM_ASV_SEQS_FA} > ${FINAL_SWARM_ASV_SEQS_FA}"
+        echo ${CMD} >> ${LOGCMD}
+        eval ${CMD}
+
+    ]]></command>
+    <inputs>
+        <param name="asv_seq" type="data" format="fasta"  label="ASV sequences file" help="TODO" />
+        <param name="swarm_asv_seq" type="data" format="fasta"  label="ASV swarm sequences" help="TODO" />
+    </inputs>
+    <outputs>
+        <data name="Swarm output" format="" from_work_dir="./output_dir/*" label="${tool.name} on ${on_string} output" />
+    </outputs>
+    <tests>
+    </tests>
+    <help><![CDATA[
+
+.. class:: infomark
+
+**What it does**
+
+TODO: Fill in help in reStructuredText format (https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html)
+
+Usage
+.....
+
+
+**Input**
+
+
+**Output**
+
+
+    ]]></help>
+    <citations>
+        <citation type="doi"> </citation>
+    </citations>
+</tool>
