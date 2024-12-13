@@ -1,4 +1,4 @@
-<tool id="figaro" name="Figaro" version="@TOOL_VERSION_FIGARO@+galaxy@VERSION_SUFFIX@" profile="20.01" license="MIT">
+<tool id="figaro" name="Figaro" version="@TOOL_VERSION_FIGARO@+galaxy@VERSION_SUFFIX@" profile="22.01" license="MIT">
     <description>Identify optimal optimizing microbiome rRNA gene trimming parameters for DADA2</description>
     <macros>
         <import>macro.xml</import>
@@ -21,7 +21,7 @@
         cp /tmp/*.json '$figaro_output'
     ]]></command>
     <inputs>
-        <param name="infiles" type="data"  multiple="true"/>
+        <param name="infiles" type="data"  multiple="true" label="Input raw data" help="TODO"/>
         <param name="amplicon_length" type="integer" value="0"  label="Amplicon length" help="TODO" />
         <param name="f_primer" type="integer" value="0" label="F Primer" help="TODO" />
         <param name="r_primer" type="integer" value="0"  label="R Primer" help="TODO" />
@@ -30,6 +30,17 @@
         <data name="figaro_output"  format="json" from_work_dir="*.json" label="${tool.name} on ${on_string} output" />
     </outputs>
     <tests>
+        <test expect_num_outputs="1">
+            <param name="infiles" value="FO156_GCCGCG_R1.fastq.gz,FO156_GCCGCG_R2.fastq.gz"/>
+            <param name="amplicon_length" value="410"/>
+            <param name="f_primer" value="14"/>
+            <param name="r_primer" value="19"/>
+            <output name="figaro_output">
+                <assert_contents>
+                    <has_size value="8622" delta="0"/>
+                </assert_contents>
+            </output>
+        </test>
     </tests>
     <help><![CDATA[
 
@@ -51,6 +62,6 @@ Usage
 
     ]]></help>
     <citations>
-        <citation type="doi"> </citation>
+        <citation type="doi">10.1101/610394</citation>
     </citations>
 </tool>

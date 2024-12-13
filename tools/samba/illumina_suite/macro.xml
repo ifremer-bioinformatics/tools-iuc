@@ -12,12 +12,6 @@
             <xref type="bio.tools">swarm</xref>
         </xrefs>
     </xml>    
-    <xml name="figaro_requirements">
-        <requirements>
-            <requirement type="package" version="@TOOL_VERSION_FIGARO@">figaro</requirement>
-            <yield/>
-        </requirements>
-    </xml>
     <xml name="swarm_requirements">
         <requirements>
             <requirement type="package" version="@TOOL_VERSION_SWARM@">swarm</requirement>
