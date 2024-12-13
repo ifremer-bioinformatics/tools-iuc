@@ -5,7 +5,6 @@
     </macros>
     <expand macro="figaro_xref"/>
     <expand macro="figaro_edam"/>
-    <expand macro="figaro_requirements"/>
     <requirements>
         <requirement type="package" version="0.7.2">loguru</requirement>
     </requirements>
@@ -13,7 +12,7 @@
         <include type="literal" path="macro.xml"/>
     </required_files>
     <command detect_errors="exit_code"><![CDATA[
-        python figaro_json2csv.py --figaro '$json_file'
+        python3 '$__tool_directory__/05b_figaro_json2csv.py' --figaro '$json_file'
     ]]></command>
     <inputs>
         <param name="json_file" type="data" format="json" label="Json file from Figaro" help="TODO" />
