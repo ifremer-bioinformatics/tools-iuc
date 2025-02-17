@@ -7,6 +7,8 @@
     <expand macro="figaro_edam"/>
     <requirements>
         <requirement type="package" version="0.7.2">loguru</requirement>
+        <requirement type="package" version="1.8.5">rich-click</requirement>
+
     </requirements>
     <required_files>
         <include type="literal" path="macro.xml"/>
@@ -18,7 +20,7 @@
         <param name="json_file" type="data" format="json" label="Json file from Figaro" help="TODO" />
     </inputs>
     <outputs>
-        <data name="Figaro output" format="csv" from_work_dir="./output_dir/*.csv" label="${tool.name} on ${on_string} output" />
+        <data name="figaro_output" format="csv" from_work_dir="./*.csv" label="${tool.name} on ${on_string} output" />
     </outputs>
     <tests>
     </tests>
