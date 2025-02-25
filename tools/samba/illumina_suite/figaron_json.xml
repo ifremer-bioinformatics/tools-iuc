@@ -8,7 +8,6 @@
     <requirements>
         <requirement type="package" version="0.7.2">loguru</requirement>
         <requirement type="package" version="1.8.5">rich-click</requirement>
-
     </requirements>
     <required_files>
         <include type="literal" path="macro.xml"/>

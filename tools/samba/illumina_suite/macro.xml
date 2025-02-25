@@ -20,10 +20,10 @@
     </xml>
     <xml name="figaro_edam">
         <edam_topics>
-            <edam_topic>topic_TODO</edam_topic>
+            <edam_topic>Sequencing</edam_topic>
         </edam_topics>
         <edam_operations>
-            <edam_operation>operation_TODO</edam_operation>
+            <edam_operation>k-mer counting</edam_operation>
         </edam_operations>
     </xml>
     <xml name="swarm_edam">

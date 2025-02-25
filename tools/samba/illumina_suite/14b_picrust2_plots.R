@@ -1,15 +1,20 @@
 #!/usr/bin/env Rscript
+
+
+args <- commandArgs(trailingOnly = TRUE)
+
+if (length(args) < 0) {
+    stop("This tool needs at least 4 argument : longitude, latitude, species and number of records")
+}else {
+    input_data <- args[1]
+
+}
 ###############################################################################
 ##                                                                           ##
 ## Purpose of script: Statistical representation of functional predictions   ##
 ##                                                                           ##
 ###############################################################################
 
-## Load up the needed packages ####
-requiredPackages = c("dplyr","vegan","ggplot2","svglite","stringr","ggord","compositions")
-for(package in requiredPackages){
-  library(package,character.only = TRUE)
-}
 
 functional_predictions <- function(pred,table,metadata,pred_plot,name,var) {
 
@@ -64,7 +69,7 @@ traits = unlist(strsplit(args[1], ","))
 
 if( "EC" %in% traits) {
     main_ec <- function(){
-      pred_ec = read.table("14_PICRUSt2_predictions_output/EC_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz", h=T, sep="\t", check.names=F, quote="")
+      pred_ec = read.table(input_data, h=T, sep="\t", check.names=F, quote="")
       pred_ec = data.frame(pred_ec[,2:length(pred_ec)] %>% group_by(description) %>% summarise_all(.funs = sum), check.names=F)
       table = args[2]
       metadata = args[3]
@@ -81,7 +86,7 @@ if( "EC" %in% traits) {
 
 if( "KO" %in% traits) {
     main_ko <- function(){
-      pred_ko = read.table("14_PICRUSt2_predictions_output/KO_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz", h=T, sep="\t", check.names=F, quote="")
+      pred_ko = read.table(input_data, h=T, sep="\t", check.names=F, quote="")
       pred_ko = data.frame(pred_ko[,2:length(pred_ko)] %>% group_by(description) %>% summarise_all(.funs = sum), check.names=F)
       table = args[2]
       metadata = args[3]
@@ -99,7 +104,7 @@ if( "KO" %in% traits) {
 
 if( "COG" %in% traits) {
     main_cog <- function(){
-      pred_cog = read.table("14_PICRUSt2_predictions_output/COG_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz", h=T, sep="\t", check.names=F, quote="")
+      pred_cog = read.table(input_data, h=T, sep="\t", check.names=F, quote="")
       pred_cog = data.frame(pred_cog[,2:length(pred_cog)] %>% group_by(description) %>% summarise_all(.funs = sum), check.names=F)
       table = args[2]
       metadata = args[3]
@@ -116,7 +121,7 @@ if( "COG" %in% traits) {
 
 if( "PFAM" %in% traits) {
     main_pfam <- function(){
-      pred_pfam = read.table("14_PICRUSt2_predictions_output/PFAM_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz", h=T, sep="\t", check.names=F, quote="")
+      pred_pfam = read.table(input_data, h=T, sep="\t", check.names=F, quote="")
       pred_pfam = data.frame(pred_pfam[,2:length(pred_pfam)] %>% group_by(description) %>% summarise_all(.funs = sum), check.names=F)
       table = args[2]
       metadata = args[3]
@@ -133,7 +138,7 @@ if( "PFAM" %in% traits) {
 
 if( "TIGRFAM" %in% traits) {
     main_tigrfam <- function(){
-      pred_tigrfam = read.table("14_PICRUSt2_predictions_output/TIGRFAM_metagenome_out/pred_metagenome_unstrat_descrip.tsv.gz", h=T, sep="\t", check.names=F, quote="")
+      pred_tigrfam = read.table(input_data, h=T, sep="\t", check.names=F, quote="")
       pred_tigrfam = data.frame(pred_tigrfam[,2:length(pred_tigrfam)] %>% group_by(description) %>% summarise_all(.funs = sum), check.names=F)
       table = args[2]
       metadata = args[3]
@@ -149,7 +154,7 @@ if( "TIGRFAM" %in% traits) {
 }
 
 main_metacyc <- function(){
-  pred_path = read.table("14_PICRUSt2_predictions_output/pathways_out/path_abun_unstrat_descrip.tsv.gz", h=T, sep="\t", check.names=F, quote="")
+  pred_path = read.table(input_data, h=T, sep="\t", check.names=F, quote="")
   pred_path = data.frame(pred_path[,2:length(pred_path)] %>% group_by(description) %>% summarise_all(.funs = sum), check.names=F)
   table = args[2]
   metadata = args[3]
@@ -164,7 +169,7 @@ if (!interactive()) {
 }
 
 main_metacyc_sec <- function(){
-  pred_path_sec = read.table("14_PICRUSt2_predictions_output/pathways_out/path_abun_unstrat_descrip_secondary_level.tsv.gz", h=T, sep="\t", check.names=F, quote="")
+  pred_path_sec = read.table(input_data, h=T, sep="\t", check.names=F, quote="")
   pred_path_sec = data.frame(pred_path_sec[,2:length(pred_path_sec)] %>% group_by(description) %>% summarise_all(.funs = sum), check.names=F)
   table = args[2]
   metadata = args[3]

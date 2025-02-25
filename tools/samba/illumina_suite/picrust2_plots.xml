@@ -8,22 +8,21 @@
     </macros>
     <expand macro="figaro_edam"/>
     <requirements>
-        <requirement type="package" version="1.1.4">r-dplyr</requirement>
         <requirement type="package" version="1.5.1">r-stringr</requirement>
-        <requirement type="package" version="0.8.9">r-vegan</requirement>
-        <requirement type="package" version="0.8.9">r-svglite</requirement>
-        <requirement type="package" version="0.8.9">r-compositions</requirement>
-        <requirement type="package" version="0.8.9">r-ggord</requirement>
-        <requirement type="package" version="0.8.9">r-ggplot2</requirement>
+        <requirement type="package" version="1.1.4">r-dplyr</requirement>
+        <requirement type="package" version="2.6_8">r-vegan</requirement>
+        <requirement type="package" version="2.1.3">r-svglite</requirement>
+        <requirement type="package" version="2.0_0">r-compositions</requirement>
+        <requirement type="package" version="3.5.1">r-ggplot2</requirement>
     </requirements>
     <required_files>
         <include type="literal" path="macro.xml"/>
     </required_files>
     <command detect_errors="exit_code"><![CDATA[
-        Rscript '$$__tool_directory__/07c_swarm_clustering_table.R'
+        Rscript '$__tool_directory__/14b_picrust2_plots.R'
     ]]></command>
     <inputs>
-        <param name="predictions" type="data" format="gz"  label="predictions" help="TODO" />
+        <param name="predictions" type="data" format="fastqsanger.gz" label="predictions" help="TODO" />
     </inputs>
     <outputs>
         <data name="Picrust output" format="tabular" from_work_dir="*" label="${tool.name} on ${on_string} output" />

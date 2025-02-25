@@ -1,26 +1,25 @@
-# Use the specified base image from Quay.io
-FROM quay.io/qiime2/amplicon:2024.10
+# Use the existing QIIME 2 image
+FROM sebimer/samba-v4-qiime2:2024.2
 
-# Install necessary tools for cloning and building
-RUN apt-get update && apt-get install -y \
-    git \
-    python3-dev \
-    build-essential \
-    && apt-get clean
+# Set writable cache directory for Matplotlib
+ENV MPLCONFIGDIR=/tmp/matplotlib
 
-# Clone the q2-dbotu repository and install it
-RUN git clone https://github.com/cduvallet/q2-dbotu.git /tmp/q2-dbotu && \
-    cd /tmp/q2-dbotu && \
-    python3 setup.py install && \
-    cd / && \
-    rm -rf /tmp/q2-dbotu  # Clean up temporary files
+# Set working directory
+WORKDIR /qiime2
 
-# Create input and output directories with proper permissions
-RUN mkdir -p /input /output \
-    && chmod 777 /input /output
+# Ensure Micromamba is used correctly (fix /bin/sh issue)
+SHELL ["/bin/bash", "-c"]
 
-# Set the working directory to /input
-WORKDIR /input
+# Fix QIIME 2 cache issue
+RUN rm -rf ~/.cache/qiime2 ~/.config/qiime2 && \
+    micromamba run -n qiime2-2024.2 qiime dev refresh-cache
 
-# Default command to keep the container running or to execute a shell
-CMD ["bash"]
+# Fix UMAP and Numba issues
+RUN micromamba run -n qiime2-2024.2 micromamba install -c conda-forge umap-learn numba -y
+
+# Ensure QIIME 2 loads all plugins correctly
+RUN micromamba run -n qiime2-2024.2 qiime dev refresh-cache
+
+# Set entrypoint to a known working shell
+ENTRYPOINT ["/bin/bash"]
+

@@ -4,17 +4,21 @@
         <xref type="bio.tools">qiime2</xref>
     </xrefs>
     <requirements>
-        <container type="docker">qiime2-dbotu</container>
+        <container type="docker">sebimer/samba-v4-qiime2:2024.2</container>
     </requirements>
-    <command detect_errors="exit_code">qiime dbotu-q2 call-otus '$inputs'</command>
-    <configfiles>
-        <inputs name="inputs" data_style="staging_path_and_source_path"/>
-    </configfiles>
+    <command detect_errors="exit_code"><![CDATA[
+        mkdir ./output_dir &&
+        mkdir ./input_dir &&
+        cp '$table' './input_dir/${table.element_identifier}' &&
+        cp '$sequence' './input_dir/${sequence.element_identifier}' &&
+        qiime dbotu-q2 call-otus --i-table './input_dir/${table.element_identifier}' --i-sequences './input_dir/${sequence.element_identifier}' --o-dbotu-table './output_dir/output_table.qza' --o-representative-sequences './output_dir/output_sequence.qza'
+    ]]></command>
     <inputs>
         <param name="table" type="data" format="qza" label="table" help=""/>
+        <param name="sequence" type="data" format="qza" label="sequence" help=""/>
     </inputs>
     <outputs>
-        <data name="visualization" format="qza" label="${tool.name} on ${on_string}: qza" from_work_dir=".qza"/>
+        <data name="visualization" format="qza" label="${tool.name} on ${on_string}: qza" from_work_dir="./output_dir/*.qza"/>
     </outputs>
     <tests>
         <test>
